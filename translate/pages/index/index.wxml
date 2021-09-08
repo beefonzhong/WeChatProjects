@@ -1,0 +1,101 @@
+<!--index.wxml-->
+<page-meta>
+  <navigation-bar
+    title="极速翻译" 
+    front-color="#000000"
+    background-color="#FFFFFF"
+    color-animation-duration="2000"
+    color-animation-timing-func="easeIn"
+  />
+</page-meta>
+
+<view>
+  <scroll-view  
+    scroll-with-animation="true"  
+    scroll-y="true"
+    scroll-top="{{scrollTop}}"
+    style="height:{{scrollHeight}}px; background-color: #eff1f1;"
+    >
+ 
+    <view wx:for="{{chatItems}}" wx:key="chatItems"> 
+        <view class="chat-item-row" wx:if="{{item.language=='zh_cn'}}">
+          <view class="message-body-me"> 
+            <view class="message-line">
+              <view wx:if="{{item.editing==false}}">
+                <image src="../image/edit.png" class="message-btn" bindtap="editMessage" data-idx='{{index}}'></image>
+                <view class="message-text">{{item.message}}</view>
+              </view>
+              <view wx:else>
+                <image src="../image/ok.png" class="message-btn" bindtap="editMessage" data-idx='{{index}}'></image>
+                <view class="message-text"><textarea  confirm-type="done" bindconfirm="editMessage" data-idx='{{index}}' focus="{{item.focus}}" auto-height value="{{item.message}}" bindinput="bzInput"/></view>
+              </view>
+            </view>
+
+            <view class="divLine"></view>
+
+            <view class="message-line">
+              <view wx:if="{{item.playing==false}}">
+                <!-- <image src="../image/bofang3.png" class="message-btn" bindtap="editMessage" data-idx='{{index}}'></image> -->
+                <view class="message-text">{{item.tmessage}}</view>
+              </view>
+              <view wx:else>
+                <!-- <image src="../image/bofang1.png" class="message-btn" bindtap="editMessage" data-idx='{{index}}' wx:if="{{item.playstep==1}}"></image>
+                <image src="../image/bofang2.png" class="message-btn" bindtap="editMessage" data-idx='{{index}}' wx:if="{{item.playstep==2}}"></image>
+                <image src="../image/bofang3.png" class="message-btn" bindtap="editMessage" data-idx='{{index}}' wx:if="{{item.playstep==3}}"></image> -->
+              </view>
+            </view>
+          </view>  
+        </view>
+        <view class="chat-item-row" wx:else>  
+          <view class="message-body"> 
+            <view class="message-line">
+              <view wx:if="{{item.editing==false}}">
+                <image src="../image/edit.png" class="message-btn" bindtap="editMessage" data-idx='{{index}}'></image>
+                <view class="message-text">{{item.message}}</view>
+              </view>
+              <view wx:else>
+                <image src="../image/ok.png" class="message-btn" bindtap="editMessage" data-idx='{{index}}'></image>
+                <view class="message-text"><textarea  confirm-type="done" bindconfirm="editMessage" data-idx='{{index}}' focus="{{item.focus}}" auto-height value="{{item.message}}" bindinput="bzInput"/></view>
+              </view>
+            </view>
+
+            <view class="divLine"></view>
+
+            <view class="message-line">
+              <view wx:if="{{item.playing==false}}">
+                <!-- <image src="../image/bofang3.png" class="message-btn" bindtap="editMessage" data-idx='{{index}}'></image> -->
+                <view class="message-text">{{item.tmessage}}</view>
+              </view>
+              <view wx:else>
+                <!-- <image src="../image/bofang1.png" class="message-btn" bindtap="editMessage" data-idx='{{index}}' wx:if="{{item.playstep==1}}"></image>
+                <image src="../image/bofang2.png" class="message-btn" bindtap="editMessage" data-idx='{{index}}' wx:if="{{item.playstep==2}}"></image>
+                <image src="../image/bofang3.png" class="message-btn" bindtap="editMessage" data-idx='{{index}}' wx:if="{{item.playstep==3}}"></image> -->
+              </view>
+            </view>
+          </view>
+        </view>
+    </view>
+   
+  
+</scroll-view>
+
+
+<view class="footer-input-box">
+    <view class="footer-input-body">
+      <button type="primary"  bindtouchstart="startLuyin" bindtouchend="endLuyin" data-language='zh_cn'>
+        <view style="height:100%;width=100%; display:flex;align-items:center;font-size: 35rpx;float: left;justify-content:center;">中文</view>
+        <view style="height:100%;width=100%; display:flex;align-items:center;font-size: 25rpx;justify-content:center;">长按说话</view>
+      </button>
+      <button type="warn"  bindtouchstart="startLuyin" bindtouchend="endLuyin" data-language='en_us'>
+        <view style="height:100%;width=100%; display:flex;align-items:center;font-size: 35rpx;float: left;justify-content:center;">EN</view>
+        <view style="height:100%;width=100%; display:flex;align-items:center;font-size: 25rpx;justify-content:center;">Hold To Talk</view>
+      </button>
+      <!-- <image src="../image/jianpan.png" class="mp3-btn" bindtap="showLy" wx:if="{{luYing}}"></image>
+      <image src="../image/shengyin.png" class="mp3-btn" bindtap="showLy" wx:else></image>
+      <button class="luyingBtn" bindtouchstart="startLuyin" bindtouchend="endLuyin" wx:if="{{luYing}}">按住说话</button>
+      <input class="chat-input-style" bindinput="setMessage" value="{{textMessage}}" wx:else></input>
+      <view class="chat-input-send-button-style" wx:if="{{textMessage}}" bindtap="sendJsonText">发送</view> -->
+    </view>
+</view>
+
+</view>
